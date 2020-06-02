@@ -1,0 +1,66 @@
+{
+	"folders": {},
+	"connections": {
+		"mariaDB-1726dad303d-28352fbc66152ccf": {
+			"provider": "mysql",
+			"driver": "mariaDB",
+			"name": "MariaDB - mysqld",
+			"save-password": true,
+			"show-system-objects": true,
+			"read-only": false,
+			"configuration": {
+				"host": "ksla.iptime.org",
+				"port": "33006",
+				"database": "mysqld",
+				"url": "jdbc:mysql://ksla.iptime.org:33006/mysqld",
+				"type": "dev",
+				"provider-properties": {
+					"@dbeaver-serverTimezone@": "Auto-detect"
+				},
+				"auth-model": "native",
+				"handlers": {}
+			},
+			"custom-properties": {
+				"database.meta.separate.connection": "false"
+			}
+		},
+		"oracle_thin-1726dafa2db-4510ac88a3f78c73": {
+			"provider": "oracle",
+			"driver": "oracle_thin",
+			"name": "Oracle - orcl",
+			"save-password": true,
+			"show-system-objects": true,
+			"read-only": false,
+			"configuration": {
+				"host": "ksla.iptime.org",
+				"port": "31521",
+				"database": "orcl",
+				"url": "jdbc:oracle:thin:@//ksla.iptime.org:31521/orcl",
+				"type": "dev",
+				"provider-properties": {
+					"@dbeaver-check-schema-content@": "false",
+					"@dbeaver-always-show-dba@": "false",
+					"@dbeaver-always-use-dba-views@": "false",
+					"@dbeaver-meta-use-sys-schema@": "false",
+					"@dbeaver-meta-use-simple-constraints@": "false",
+					"@dbeaver-use-rule-hint@": "false",
+					"@dbeaver-use-meta-optimizer@": "false",
+					"@dbeaver-connection-type@": "BASIC",
+					"@dbeaver-sid-service@": "SERVICE"
+				},
+				"auth-model": "oracle_native",
+				"handlers": {}
+			}
+		}
+	},
+	"connection-types": {
+		"dev": {
+			"name": "Development",
+			"color": "255,255,255",
+			"description": "Regular development database",
+			"auto-commit": true,
+			"confirm-execute": false,
+			"confirm-data-change": false
+		}
+	}
+}

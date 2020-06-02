@@ -1,0 +1,35 @@
+{
+	"folders": {},
+	"connections": {
+		"mariaDB-1726dad303d-28352fbc66152ccf": {
+			"provider": "mysql",
+			"driver": "mariaDB",
+			"name": "MariaDB - mysqld",
+			"save-password": true,
+			"show-system-objects": true,
+			"read-only": false,
+			"configuration": {
+				"host": "ksla.iptime.org",
+				"port": "33006",
+				"database": "mysqld",
+				"url": "jdbc:mysql://ksla.iptime.org:33006/mysqld",
+				"type": "dev",
+				"provider-properties": {
+					"@dbeaver-serverTimezone@": "Auto-detect"
+				},
+				"auth-model": "native",
+				"handlers": {}
+			}
+		}
+	},
+	"connection-types": {
+		"dev": {
+			"name": "Development",
+			"color": "255,255,255",
+			"description": "Regular development database",
+			"auto-commit": true,
+			"confirm-execute": false,
+			"confirm-data-change": false
+		}
+	}
+}
