@@ -4,7 +4,7 @@ public class ContactUNIV {
 	private int pidx;
 	private int fr_idx;
 	private String major;
-	private int grade;
+	private String grade;
 	
 	public int getPidx() {
 		return pidx;
@@ -15,7 +15,7 @@ public class ContactUNIV {
 	public String getMajor() {
 		return major;
 	}
-	public int getGrade() {
+	public String getGrade() {
 		return grade;
 	}
 	public void setPidx(int pidx) {
@@ -27,12 +27,8 @@ public class ContactUNIV {
 	public void setMajor(String major) {
 		this.major = major;
 	}
-	public void setGrade(int grade) {
-		if (grade > 1 || grade < 4) {
-			System.out.println("입력 범위 초과! 1~4의 값이 입력되어야 합니다.");
-		}else {
-			this.grade = grade;
-		}
+	public void setGrade(String grade) {
+		this.grade = grade;
 	}
 	
 	@Override
@@ -40,10 +36,8 @@ public class ContactUNIV {
 		return "ContactUNIV [pidx=" + pidx + ", fr_idx=" + fr_idx + ", major=" + major + ", grade=" + grade + "]";
 	}
 	
-	public ContactUNIV(int pidx, int fr_idx, String major, int grade) {
+	public ContactUNIV(String major, String grade) {
 		super();
-		this.pidx = pidx;
-		this.fr_idx = fr_idx;
 		this.major = major;
 		this.grade = grade;
 	}

@@ -35,4 +35,11 @@ public class ContactCOM {
 	public String toString() {
 		return "ContactCOM [pidx=" + pidx + ", fr_idx=" + fr_idx + ", company=" + company + ", job=" + job + "]";
 	}
+	
+	public ContactCOM(String company, String job) {
+		super();
+		this.company = company;
+		this.job = job;
+	}
+	
 }

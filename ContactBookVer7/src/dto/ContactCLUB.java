@@ -36,4 +36,11 @@ public class ContactCLUB {
 		return "ContactCOM [pidx=" + pidx + ", fr_idx=" + fr_idx + ", clubname=" + clubname + ", nickname=" + nickname
 				+ "]";
 	}
+	public ContactCLUB(String clubname, String nickname) {
+		super();
+		this.clubname = clubname;
+		this.nickname = nickname;
+	}
+	
+	
 }

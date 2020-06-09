@@ -1,16 +1,27 @@
 package userIf;
 
+import java.sql.SQLException;
+import dao.InsertDAO;
+import dto.Contact;
+import dto.ContactCLUB;
+import dto.ContactCOM;
+import dto.ContactUNIV;
+
 public class ContactAddIF {
 	private int fType, more;
 	private String name, pnum, addr, email, fText;
+	private String grade, major, company, job, clubname, nickname;
 	private boolean menuExitFlag, inputOkFlag;
 	RegEX ex = RegEX.getInstance();
+	InsertDAO insDAO = InsertDAO.getInstance();
+	
 	
 	private static ContactAddIF instance;
 	
 	private ContactAddIF() {
 		// Contstructor
 		name = null; pnum = null; addr = null; email = null; fText = null; fType = 0;
+		grade = null; major = null; company = null; job = null; clubname = null; nickname = null;
 		more = -1;
 		menuExitFlag = true;
 		inputOkFlag = true;
@@ -30,7 +41,7 @@ public class ContactAddIF {
 		}
 	}
 	
-	public void AddIF() {
+	public void AddIF() throws SQLException {
 		while (menuExitFlag) {
 			inputFlagReset(); 
 			// 재입력을 선택 했을경우 직전 inputOKFlag상태는 False 이며 플래그 초기화 없이는 마지막(전화번호 추가등록 여부 질문)으로 직행한다.
@@ -119,7 +130,92 @@ public class ContactAddIF {
 			System.out.println("addr : " + this.addr);
 			System.out.println("ftype : " + fType + " text : " + fText);
 			
-			// DAO단에서 ContactAdDao(this.name, this.pnum, this.email, this.addr, this.fText);
+			
+				if (this.fType == 1) {
+					while (inputOkFlag) {
+						// 1. Univ
+						System.out.println("대학교 친구를 선택하셨습니다. 친구의 학년을 입력해주세요.");
+						System.out.println("만약 입력하지 않으면 1학년으로 기본 등록됩니다.");
+						System.out.print(">> ");
+						ContactUserIF.sc.nextLine();
+						this.grade = ContactUserIF.sc.nextLine();
+						if (!ex.grade(this.grade)) {
+							System.out.println("입력이 잘못되었습니다. 1~4 이내의 범위의 숫자만을 입력해주세요.");
+						}else {
+							inputOkFlag = false;
+						}
+					}
+					inputFlagReset();
+					while (inputOkFlag) {
+						System.out.println("친구의 전공을 입력해주세요.");
+						System.out.print(">> ");
+						this.major = ContactUserIF.sc.nextLine();
+						if (!this.major.isEmpty() && !this.major.contentEquals("")) {
+							inputOkFlag = false;
+						}else {
+							System.out.println("전공은 입력되어야 합니다. 다시 입력해주세요.");
+						}
+					}
+					inputFlagReset();
+					insDAO.ContactBaseInfo(new Contact(this.name, this.pnum, this.addr, this.email, this.fText));
+					insDAO.contactUnivInfo(new ContactUNIV(this.major, this.grade));
+					break;
+				}else if (this.fType == 2) {
+					// 2. Com
+					while (inputOkFlag) {
+						System.out.println("회사 동료를 선택하셨습니다. 동료가 다니는 회사 이름을 입력해주세요.");
+						System.out.print(">> ");
+						ContactUserIF.sc.nextLine();
+						this.company = ContactUserIF.sc.nextLine();
+						if (!this.company.isEmpty() && !this.company.contentEquals("") ) {
+							inputOkFlag = false;
+						}else {
+							System.out.println("회사 이름 입력이 필요합니다. 다시 입력해주세요.");
+						}
+					}
+					inputFlagReset();
+					while (inputOkFlag) {
+						System.out.println("동료의 직급을 입력해주세요.");
+						System.out.print(">> ");
+						this.job = ContactUserIF.sc.nextLine();
+						if (!this.job.isEmpty() && !this.job.contentEquals("")) {
+							inputOkFlag = false;
+						}else {
+							System.out.println("직급을 입력하지 않으셨습니다. 다시 확인해주세요.");
+						}
+					}
+					inputFlagReset();
+					insDAO.ContactBaseInfo(new Contact(this.name, this.pnum, this.addr, this.email, this.fText));
+					insDAO.contactComInfo(new ContactCOM(company, job));
+					break;
+				}else if (this.fType == 3) {
+					// 3. Club
+					while (inputOkFlag) {
+						System.out.println("클럽 동료를 선택하셨습니다. 클럽명을 입력해주세요.");
+						ContactUserIF.sc.nextLine();
+						this.clubname = ContactUserIF.sc.nextLine();
+						if (!this.clubname.isEmpty() && !this.clubname.contentEquals("")) {
+							inputOkFlag = false;
+						}else {
+							System.out.println("클럽명이 입력 되지 않았습니다. 클럽명을 입력해주세요.");
+						}
+					}
+					inputFlagReset();
+					while (inputOkFlag) {
+						System.out.println("클럽원의 닉네임을 입력해주세요.");
+						this.nickname = ContactUserIF.sc.nextLine();
+						if (!this.nickname.isEmpty() && !this.nickname.contentEquals("")) {
+							inputOkFlag = false;
+						}else {
+							System.out.println("닉네임이 입력되지 않았습니다. 닉네임을 입력해주세요.");
+						}
+					}
+					inputFlagReset();
+					insDAO.ContactBaseInfo(new Contact(this.name, this.pnum, this.addr, this.email, this.fText));
+					insDAO.contactClubInfo(new ContactCLUB(clubname, nickname));
+				}else {
+					System.out.println("입력 된 자료에 문제가 있습니다. 다시 확인해주세요.");
+				}	
 			
 			while (inputOkFlag) {
 				System.out.println("계속해서 전화번호를 등록하시겠습니까?");
@@ -149,5 +245,4 @@ public class ContactAddIF {
 			inputOkFlag = true;
 		}
 	}
-	
 }

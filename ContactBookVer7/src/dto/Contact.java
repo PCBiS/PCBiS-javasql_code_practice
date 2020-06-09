@@ -8,8 +8,7 @@ public class Contact {
 	private String email;
 	private String friendtype;
 	
-	public Contact(int pidx, String name, String phonenum, String address, String email, String friendtype) {
-		this.pidx = pidx;
+	public Contact(String name, String phonenum, String address, String email, String friendtype) {
 		this.name = name;
 		this.phonenum = phonenum;
 		this.address = address;
